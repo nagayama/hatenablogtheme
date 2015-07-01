@@ -4,7 +4,9 @@ argv        = require('minimist')(process.argv.slice(2))
 browserSync = require('browser-sync')
 runSequence = require('run-sequence')
 
-blog = 'http://nagayama.hatenablog.com/'
+# グローバルヘッダがロードされるとリダイレクト?されるので
+# ヘッダが無いブログを指定する必要あり
+blog = 'http://blog.kentarok.org/'
 
 glob =
   dist   : 'dist/**/*'
@@ -49,13 +51,13 @@ gulp.task 'watch', ['build'], ->
       {
         match: /http\:\/\/blog.hatena.ne.jp\/\-\/blog_style\/[^"]+/i
         fn: (match)->
-          return '/styles/main.css'
+          return '/styles/main.css?'
       }
-      {
-        match: /<script.*blog.hatena.ne.jp.*script>/i
-        fn: (match)->
-          return ''
-      }
+      #{
+      #  match: /<script.*blog.hatena.ne.jp.*script>/i
+      #  fn: (match)->
+      #    return ''
+      #}
     ]
 
   gulp.watch [glob.sass], ['sass']
