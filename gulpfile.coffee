@@ -27,6 +27,7 @@ gulp.task 'images', ->
       progressive: true
       interlaced: true
     .pipe gulp.dest dist.images
+    .pipe $.if !isProduction, browserSync.reload()
 
 gulp.task 'sass', ->
   gulp
@@ -59,6 +60,7 @@ gulp.task 'watch', ['build'], ->
     ]
 
   gulp.watch [glob.sass], ['sass']
+  gulp.watch [glob.images], ['images']
 
 gulp.task 'clean', require('del').bind(null, [glob.dist])
 
