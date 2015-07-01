@@ -27,7 +27,6 @@ gulp.task 'images', ->
       progressive: true
       interlaced: true
     .pipe gulp.dest dist.images
-    .pipe $.if !isProduction, browserSync.reload()
 
 gulp.task 'sass', ->
   gulp
