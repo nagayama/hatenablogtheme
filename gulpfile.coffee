@@ -7,17 +7,17 @@ runSequence = require('run-sequence')
 blog = 'http://nagayama.hatenablog.com/'
 
 glob =
-  dist    : "dist/**/*"
-  images  : "assets/images/**/*"
-  sass    : "assets/styles/**/*.scss"
+  dist   : 'dist/**/*'
+  images : 'assets/images/**/*'
+  sass   : 'assets/styles/**/*.scss'
 
 dist =
-  images   : "dist/images"
-  sass     : "dist/styles"
+  images : 'dist/images'
+  sass   : 'dist/styles'
 
-devEnv = process.env.NODE_ENV || 'development'
-devEnv = 'production' if argv.production
-isProduction = true if devEnv == "production"
+devEnv       = process.env.NODE_ENV || 'development'
+devEnv       = 'production' if argv.production
+isProduction = true if devEnv == 'production'
 
 gulp.task 'images', ->
   gulp
@@ -39,23 +39,23 @@ gulp.task 'sass', ->
     .pipe $.minifyCss()
     .pipe $.if !isProduction, $.sourcemaps.write '.'
     .pipe gulp.dest dist.sass
-    .pipe $.if !isProduction, browserSync.stream(match:"**/*.css")
+    .pipe $.if !isProduction, browserSync.stream(match:'**/*.css')
 
 gulp.task 'watch', ['build'], ->
   browserSync
     proxy: blog
-    middleware: require("serve-static")("dist")
-    rewriteRules:[
+    middleware: require('serve-static')('dist')
+    rewriteRules: [
       {
         match: /http\:\/\/blog.hatena.ne.jp\/\-\/blog_style\/[^"]+/i
         fn: (match)->
-          return "/styles/main.css"
-      },
+          return '/styles/main.css'
+      }
       {
         match: /<script.*blog.hatena.ne.jp.*script>/i
         fn: (match)->
-          return ""
-      },
+          return ''
+      }
     ]
 
   gulp.watch [glob.sass], ['sass']
