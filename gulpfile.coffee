@@ -7,6 +7,9 @@ runSequence = require('run-sequence')
 # グローバルヘッダがロードされるとリダイレクト?されるので
 # ヘッダが無いブログを指定する必要あり
 blog = 'http://blog.kentarok.org/'
+ 
+# gulp watch --blog=http://www.exapmle.com 
+blog = argv.blog if argv.blog
 
 glob =
   dist   : 'dist/**/*'
